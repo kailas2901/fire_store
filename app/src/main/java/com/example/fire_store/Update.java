@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,6 +53,7 @@ public class Update extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = oldn.getText().toString();
+                oldn.setText("");
                 DeleteData(name);
             }
         });
@@ -70,10 +72,10 @@ public class Update extends AppCompatActivity {
 
 
 
-                    fb.collection("students").document(documentID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    fb.collection("students").document(documentID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(Update.this, "", Toast.LENGTH_SHORT).show();
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(Update.this, "deleted", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
